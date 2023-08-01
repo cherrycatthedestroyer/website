@@ -1,8 +1,8 @@
 import p5Type from "p5";
 import Matter from "matter-js";
-import Ball from "../scripts/ball"
-import Flipper from "../scripts/flipper"
-import PinballFrame from "../scripts/pinballFrame";
+import Ball from "./ball"
+import Flipper from "./flipper"
+import PinballFrame from "./pinballFrame";
 
 let Engine = Matter.Engine, Runner = Matter.Runner;
 

@@ -1,32 +1,30 @@
+import React from "react";
 import Sketch from "react-p5";
 import p5Type from "p5";
 import StarField from "../scripts/starField";
 import Cockpit from "../scripts/cockpit";
 
-let WIDTH, HEIGHT;
 
-let starfield: StarField;
-let cockpit: Cockpit;
 
-function Canvas() {
-  function setup (p5: p5Type , canvasParentRef: Element){
-    WIDTH = p5.windowWidth;
-    HEIGHT = p5.windowHeight;
-    let cnv = p5.createCanvas(WIDTH, HEIGHT).parent(canvasParentRef);
-    starfield = new StarField(WIDTH,HEIGHT,50,p5);
+function Canvas(){
+  let starfield: StarField;
+  let cockpit: Cockpit;
+  const setup = (p5: p5Type, canvasParentRef: Element) =>{
+    let cnv = p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
+    starfield = new StarField(p5.windowWidth,p5.windowHeight,50,p5);
   }
 
-  function preloader(p5: p5Type){
+  const preloader = (p5: p5Type) =>{
     cockpit = new Cockpit(p5.windowWidth,p5.windowHeight,p5);
   }
 
-  function draw(p5: p5Type){
+  const draw = (p5: p5Type) =>{
     p5.background(0);
     starfield.show(p5);
     cockpit.show(p5);
   }
 
-  function handleKeyRelease(p5: p5Type){
+  const handleKeyRelease = (p5: p5Type) =>{
     if(p5.keyCode == p5.LEFT_ARROW){
       cockpit.pinballEvent("lFlip");
       cockpit.handleHudEvents(p5,"LEFT");
@@ -49,7 +47,7 @@ function Canvas() {
     }
   }
 
-  function handleClick(p5: p5Type){
+  const handleClick = (p5: p5Type) =>{
     let x = p5.mouseX;
     let y = p5.mouseY;
     if (cockpit.screen.state=="on"){
@@ -94,14 +92,14 @@ function Canvas() {
     }
   }
 
-  function update(p5: p5Type){
+  const update = (p5: p5Type) =>{
   }
 
-  function response(p5: p5Type){
+  const response= (p5: p5Type) =>{
     p5.resizeCanvas(p5.windowWidth,p5.windowHeight);
   }
   
-  return (<div>
+  return(
     <Sketch 
     setup={setup} 
     draw={draw} 
@@ -110,7 +108,7 @@ function Canvas() {
     windowResized={response}
     preload={preloader}
     mouseClicked={handleClick}
-  /></div>)
+  />);
 }
 
 export default Canvas;
