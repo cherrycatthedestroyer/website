@@ -1,8 +1,8 @@
 import p5Type from "p5";
 import "p5/lib/addons/p5.sound";
 import HUD from "./hud";
-import PromptText from "./promptText";
-import SmallText from "./smallText";
+import PromptText from "../elements/promptText";
+import SmallText from "../elements/smallText";
 
 class Music extends HUD {
     track1: SmallText;
@@ -67,11 +67,15 @@ class Music extends HUD {
         }
     }
 
-    show(p5: p5Type) {
-        super.show(p5);
+    show(p5: p5Type,isMobile:boolean) {
+        super.show(p5,isMobile);
+        let offset;
+        isMobile?p5.scale(1.1,1.1):p5.scale(0.9,0.9);
+        isMobile?offset=120:offset=0;
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);
-            this.logo.show(p5,-7,-220,this.opacityCounter);
+            this.logo.show(p5,-7,-220+offset,this.opacityCounter);
+            isMobile?p5.scale(1.5,1.5):p5.scale(1,1);
             this.elementCount==1? this.track1.select():this.track1.unselect();
             this.elementCount==2? this.track2.select():this.track2.unselect();
             this.elementCount==3? this.track3.select():this.track3.unselect();
@@ -80,11 +84,11 @@ class Music extends HUD {
             this.specialIndex==2? this.track2.activate():this.track2.dummy();
             this.specialIndex==3? this.track3.activate():this.track3.dummy();
 
-            this.track1.show(p5,-7,-150,this.opacityCounter);
-            this.track2.show(p5,-7,-110,this.opacityCounter);
-            this.track3.show(p5,-7,-70,this.opacityCounter);
+            this.track1.show(p5,-7,-150+offset,this.opacityCounter);
+            this.track2.show(p5,-7,-110+offset,this.opacityCounter);
+            this.track3.show(p5,-7,-70+offset,this.opacityCounter);
 
-            this.prompt1.show(p5,-7,-20,this.opacityCounter);
+            this.prompt1.show(p5,-7,-20+offset,this.opacityCounter);
         }
         p5.pop();
     }

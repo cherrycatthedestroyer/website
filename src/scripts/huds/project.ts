@@ -1,8 +1,8 @@
 import p5Type from "p5";
 import HUD from "./hud";
-import HeadingText from "./headingText";
-import BodyText from "./bodyText";
-import PromptText from "./promptText";
+import HeadingText from "../elements/headingText";
+import BodyText from "../elements/bodyText";
+import PromptText from "../elements/promptText";
 
 class Project extends HUD {
     infoHeading: HeadingText;
@@ -27,9 +27,8 @@ class Project extends HUD {
         this.stack.setToPara(p5);
     }
 
-    show(p5: p5Type) {
-        super.show(p5);
-        p5.scale(0.9,0.9);
+    show(p5: p5Type,isMobile:boolean) {
+        super.show(p5,isMobile);
     }
 }
 

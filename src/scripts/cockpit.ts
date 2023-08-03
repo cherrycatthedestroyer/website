@@ -1,16 +1,16 @@
 import p5Type from "p5";
 import Screen from "./screen";
-import Home from "./home";
-import ProjectSearch from "./projectSearch";
-import HUD from "./hud";
-import Spaceball from "./spaceball";
-import Taskpad from "./taskpad";
-import Faceflute from "./faceflute";
-import Vibecheck from "./vibecheck";
-import Fishingsim from "./fishingsim";
-import Music from "./music";
+import Home from "./huds/home";
+import ProjectSearch from "./huds/projectSearch";
+import HUD from "./huds/hud";
+import Spaceball from "./huds/spaceball";
+import Taskpad from "./huds/taskpad";
+import Faceflute from "./huds/faceflute";
+import Vibecheck from "./huds/vibecheck";
+import Fishingsim from "./huds/fishingsim";
+import Music from "./huds/music";
 import MusicPlayer from "./musicPlayer";
-import Skills from "./skills";
+import Skills from "./huds/skills";
 
 class Cockpit {
     width: number;
@@ -47,8 +47,8 @@ class Cockpit {
     }
 
 
-    showHuds(p5: p5Type){
-        this.hudScreens.forEach( e => e.show(p5));
+    showHuds(p5: p5Type,isMobile:boolean){
+        this.hudScreens.forEach( e => e.show(p5,isMobile));
     }
 
     handleHudEvents(p5: p5Type, action:string){
@@ -133,18 +133,22 @@ class Cockpit {
         }
     }
 
-    show(p5: p5Type) {
+    show(p5: p5Type,isMobile:boolean,width:number,height:number) {
+        this.width=width;
+        this.height=height;
         p5.push();
         p5.translate(this.width/2,this.height/2);
         p5.scale(1.2);
         this.update(p5);
         let calcAngle = p5.map(Math.sin(this.cockpitAngle),-1,1,p5.radians(-Math.PI/2),p5.radians(Math.PI/2));
-        p5.rotate(calcAngle);
-        p5.image(this.cockpitImg,-this.width/2,-this.height/2,this.width,this.height);
+        if (isMobile===false){
+            p5.rotate(calcAngle);
+            p5.image(this.cockpitImg,-this.width/2,-this.height/2,this.width,this.height);
+        }
         p5.scale(this.width/1368,this.height/755);
-        this.radio.show(p5);
-        this.showHuds(p5);
-        this.screen.show(p5);
+        this.radio.show(p5,isMobile);
+        this.showHuds(p5,isMobile);
+        this.screen.show(p5,isMobile);
         p5.pop();
     }
 }

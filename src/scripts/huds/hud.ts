@@ -1,7 +1,7 @@
 import p5Type from "p5";
-import Element from "./element";
-import PromptText from "./promptText";
-import HeadingText from "./headingText";
+import Element from "../elements/element";
+import PromptText from "../elements/promptText";
+import HeadingText from "../elements/headingText";
 
 class HUD {
     logo: HeadingText;
@@ -115,26 +115,36 @@ class HUD {
         this.state="close";
     }
 
-    show(p5: p5Type) {
+    show(p5: p5Type, isMobile:boolean) {
         this.update();
         p5.push();
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);
-            this.arrowLOff? this.arrowLeft.unselect():this.arrowLeft.select();
-            this.arrowLeft.show(p5,-265,180);
-            
-            this.arrowROff? this.arrowRight.unselect():this.arrowRight.select();
-            this.arrowRight.show(p5,160,175);
-
-            if (this.hudType!=="home"){
-                this.back.show(p5,-14,152,this.opacityCounter);
+            if (isMobile===false){
+                this.arrowLOff? this.arrowLeft.unselect():this.arrowLeft.select();
+                this.arrowLeft.show(p5,-265,180);
+                
+                this.arrowROff? this.arrowRight.unselect():this.arrowRight.select();
+                this.arrowRight.show(p5,160,175);
+    
+                if (this.hudType!=="home"){
+                    this.back.inputText="ESC";
+                    this.back.show(p5,-14,152,this.opacityCounter);
+                }
+                
+                p5.blendMode(p5.SCREEN);
+                this.grain.show(p5,140,175);
+                this.grain.show(p5,-270,175);
+                p5.scale(1,1);
+                this.grain2.show(p5,-45,40);
+                p5.blendMode(p5.BLEND);
             }
-            p5.blendMode(p5.SCREEN);
-            this.grain.show(p5,140,175);
-            this.grain.show(p5,-270,175);
-            p5.scale(1,1);
-            this.grain2.show(p5,-45,40);
-            p5.blendMode(p5.BLEND);
+            else{
+                if (this.hudType!=="home"){
+                    this.back.inputText="Tap to Escape";
+                    this.back.show(p5,-14,250,this.opacityCounter);
+                }
+            }
         }
     }
 }

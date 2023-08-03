@@ -1,7 +1,8 @@
 import p5Type from "p5";
 import HUD from "./hud";
-import HeadingText from "./headingText";
-import PromptText from "./promptText";
+import HeadingText from "../elements/headingText";
+import PromptText from "../elements/promptText";
+import { off } from "process";
 
 class Home extends HUD {
     homeElement1: HeadingText;
@@ -23,19 +24,21 @@ class Home extends HUD {
         //this.logo.setTracking(this.logo.tracking*0.8);
     }
 
-    show(p5: p5Type) {
-        super.show(p5);
-        p5.scale(0.9,0.9);
+    show(p5: p5Type, isMobile:boolean) {
+        super.show(p5,isMobile);
+        let offset;
+        isMobile?p5.scale(1.1,1.1):p5.scale(0.9,0.9);
+        isMobile?offset=130:offset=0;
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);
-            this.logo.show(p5,-7,-220,this.opacityCounter);
+            this.logo.show(p5,-7,-220+offset,this.opacityCounter);
             this.elementCount==0? this.homeElement1.select():this.homeElement1.unselect() ;
-            this.homeElement1.show(p5,-120,-160,this.opacityCounter);
+            this.homeElement1.show(p5,-120,-160+offset,this.opacityCounter);
             this.elementCount==1? this.homeElement2.select():this.homeElement2.unselect() ;
-            this.homeElement2.show(p5, 0,-160,this.opacityCounter);
+            this.homeElement2.show(p5, 0,-160+offset,this.opacityCounter);
             this.elementCount==2? this.homeElement3.select():this.homeElement3.unselect() ;
-            this.homeElement3.show(p5,110,-160,this.opacityCounter);
-            this.enterElement.show(p5,-14,-50,this.opacityCounter);
+            this.homeElement3.show(p5,110,-160+offset,this.opacityCounter);
+            this.enterElement.show(p5,-14,-50+offset,this.opacityCounter);
         }
         p5.pop();
     }

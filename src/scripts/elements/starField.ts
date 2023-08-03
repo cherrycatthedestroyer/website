@@ -86,7 +86,9 @@ class StarField {
         return "l";
     }
 
-    show(p5: p5Type) {
+    show(p5: p5Type,width:number,height:number) {
+        this.width=width;
+        this.height=height;
         this.update(p5);
     }
 }

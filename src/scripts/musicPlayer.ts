@@ -43,11 +43,11 @@ class MusicPlayer {
         
     }
 
-    show(p5: p5Type) {
+    show(p5: p5Type,isMobile:boolean) {
         if (this.isPlaying){
             p5.push();
-            p5.translate(-40,85);
-            p5.scale(0.2,-0.2);
+            isMobile?p5.translate(-570,325):p5.translate(-40,85);
+            isMobile?p5.scale(4,-0.8):p5.scale(0.2,-0.2);
             p5.fill(245,212,125,80);
             p5.noStroke();
             let spectrum = this.sensor.analyze();

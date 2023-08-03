@@ -3,7 +3,7 @@ import Matter from "matter-js";
 import Ball from "./ball"
 import Flipper from "./flipper"
 import PinballFrame from "./pinballFrame";
-import HeadingText from "./headingText";
+import HeadingText from "../elements/headingText";
 
 let Engine = Matter.Engine, Runner = Matter.Runner;
 
@@ -69,7 +69,7 @@ class Pinball {
     this.tries=this.ball.tries;
   }
 
-  show(p5: p5Type, y:number) {
+  show(p5: p5Type, y:number,isMobile:boolean) {
     this.update();
     p5.push();
     p5.translate(0,-20);
@@ -80,16 +80,18 @@ class Pinball {
     p5.text("tries: "+this.tries,140,-220);
     p5.fill(222,49,33);
     p5.textAlign(p5.CENTER);
-    p5.text("ESC to exit",0,240);
+    isMobile?p5.text("Tap here to exit",0,240):p5.text("ESC to exit",0,240);
     p5.textFont(this.font, 10);
     p5.textAlign(p5.CENTER);
     p5.textSize(14);
     if (this.ball.state==="IDLE"){
-      p5.text("SPACE to start",0,-218);
+      isMobile?p5.text("Tap here to start",0,-218):p5.text("SPACE to start",0,-218);
     }
     else{
-      p5.text("ARROW KEYS to flip",0,-218);
+      isMobile?p5.text("Tap L/R to flip",0,-218):p5.text("ARROW KEYS to flip",0,-218);
     }
+    isMobile?this.lArrow.inputText="Tap Left":this.lArrow.inputText="Left Arrow";
+    isMobile?this.rArrow.inputText="Tap Right":this.rArrow.inputText="Right Arrow";
     this.lArrow.show(p5,-150,180,250);
     this.rArrow.show(p5,150,180,250);
     this.pinballFrame.show(p5,this.ball);

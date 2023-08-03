@@ -1,6 +1,6 @@
 import p5Type from "p5";
-import Pinball from "./pinball";
-import Element from "./element";
+import Pinball from "./pinball/pinball";
+import Element from "./elements/element";
 
 
 class Screen {
@@ -74,17 +74,18 @@ class Screen {
         }
     }
 
-    show(p5: p5Type) {
+    show(p5: p5Type,isMobile:boolean) {
         p5.push();
         p5.translate(0, this.y);
         this.update(p5);
         p5.push();
-        p5.scale(0.7,0.7);
+        isMobile?p5.scale(1.2,0.7):p5.scale(0.7,0.7);
         this.panelImg.show(p5,-500,-510);
         p5.scale(0.9,1.15);
         this.screenBtmImg.show(p5,-440, -360);
         p5.pop();
-        this.pinball.show(p5,this.y);
+        isMobile?p5.scale(1.8,1):p5.scale(1,1);
+        this.pinball.show(p5,this.y,isMobile);
         p5.push();
         p5.blendMode(p5.SCREEN);
         p5.push();

@@ -1,8 +1,8 @@
 import p5Type from "p5";
 import HUD from "./hud";
-import Element from "./element";
-import HeadingText from "./headingText";
-import PromptText from "./promptText";
+import Element from "../elements/element";
+import HeadingText from "../elements/headingText";
+import PromptText from "../elements/promptText";
 
 class ProjectSearch extends HUD {
     element1: HeadingText;
@@ -58,31 +58,33 @@ class ProjectSearch extends HUD {
         }
     }
 
-    show(p5: p5Type) {
-        super.show(p5);
-        p5.scale(0.9,0.9);
+    show(p5: p5Type,isMobile:boolean) {
+        super.show(p5,isMobile);
+        let offset;
+        isMobile?p5.scale(1.1,1.1):p5.scale(0.9,0.9);
+        isMobile?offset=120:offset=0;
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);
-            this.logo.show(p5,-7,-220,this.opacityCounter);
+            this.logo.show(p5,-7,-220+offset,this.opacityCounter);
             if (this.elementCount>=0 && this.elementCount<3){
                 this.elementCount==0? this.element1.select():this.element1.unselect() ;
-                this.element1.show(p5,-140,-160,this.opacityCounter);
+                this.element1.show(p5,-140,-160+offset,this.opacityCounter);
                 this.elementCount==1? this.element2.select():this.element2.unselect() ;
-                this.element2.show(p5,-10,-160,this.opacityCounter);
+                this.element2.show(p5,-10,-160+offset,this.opacityCounter);
                 this.elementCount==2? this.element3.select():this.element3.unselect() ;
-                this.element3.show(p5,120,-160,this.opacityCounter);
+                this.element3.show(p5,120,-160+offset,this.opacityCounter);
                 this.tabber.select();
                 
             }
             else{
                 this.elementCount==3? this.element4.select():this.element4.unselect() ;
-                this.element4.show(p5,-140,-160,this.opacityCounter);
+                this.element4.show(p5,-140,-160+offset,this.opacityCounter);
                 this.elementCount==4? this.element5.select():this.element5.unselect() ;
-                this.element5.show(p5,0,-160,this.opacityCounter);
+                this.element5.show(p5,0,-160+offset,this.opacityCounter);
                 this.tabber.unselect();
             }
-            this.tabber.show(p5, -20,-30);
-            this.enterElement.show(p5,-7,-70,this.opacityCounter);
+            this.tabber.show(p5, -20,-30+offset);
+            this.enterElement.show(p5,-7,-70+offset,this.opacityCounter);
         }
         p5.pop();
     }

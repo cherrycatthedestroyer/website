@@ -1,7 +1,7 @@
 import React from "react";
 import Sketch from "react-p5";
 import p5Type from "p5";
-import StarField from "../scripts/starField";
+import StarField from "../scripts/elements/starField";
 import Cockpit from "../scripts/cockpit";
 
 function Canvas(){
@@ -13,14 +13,22 @@ function Canvas(){
     starfield = new StarField(p5.windowWidth,p5.windowHeight,50,p5);
   }
 
+  function isMobile(p5:p5Type):boolean{
+    let isMobileReso = false;
+    if (p5.windowWidth<720&&p5.windowHeight<1280){
+      isMobileReso = true;
+    }
+    return isMobileReso;
+  }
+
   const preloader = (p5: p5Type) =>{
     cockpit = new Cockpit(p5.windowWidth,p5.windowHeight,p5);
   }
 
   const draw = (p5: p5Type) =>{
     p5.background(0);
-    starfield.show(p5);
-    cockpit.show(p5);
+    starfield.show(p5,p5.windowWidth,p5.windowHeight);
+    cockpit.show(p5,isMobile(p5),p5.windowWidth,p5.windowHeight);
   }
 
   const handleKeyRelease = (p5: p5Type) =>{
@@ -49,45 +57,25 @@ function Canvas(){
   const handleClick = (p5: p5Type) =>{
     let x = p5.mouseX;
     let y = p5.mouseY;
-    if (cockpit.screen.state=="on"){
-      if((x>0&&x<p5.windowWidth/2&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.6)){
-        cockpit.pinballEvent("lFlip");
-        cockpit.handleHudEvents(p5,"LEFT");
-      }
-      if((x>p5.windowWidth/2&&x<p5.windowWidth&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.6)){
-        cockpit.pinballEvent("rFlip");
-        cockpit.handleHudEvents(p5,"RIGHT");
-      }
-      if((x>0&&x<p5.windowWidth&&y>p5.windowHeight*0.8&&y<p5.windowHeight)){
-        cockpit.handleHudEvents(p5,"ESC");
-        cockpit.pinballEvent("ESC");
-      }
-      if((x>0&&x<p5.windowWidth&&y>0&&y<p5.windowHeight*0.2)){
-        cockpit.pinballEvent("move");
-      }
+    if((x>0&&x<p5.windowWidth*0.45&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.6)){
+      cockpit.pinballEvent("lFlip");
+      cockpit.handleHudEvents(p5,"LEFT");
     }
-    else{  
-      let xScale = p5.windowWidth/786;
-      let yScale= p5.windowHeight/608;
-      let xOffset = p5.windowWidth/2;
-      let yOffset = p5.windowHeight/2;
-      if((x>-190*xScale+xOffset&&x<-90*xScale+xOffset&&y>160*yScale+yOffset&&y<260*yScale+yOffset)){
-        cockpit.pinballEvent("lFlip");
-        cockpit.handleHudEvents(p5,"LEFT");
-      }
-      if((x>90*xScale+xOffset&&x<190*xScale+xOffset&&y>160*yScale+yOffset&&y<260*yScale+yOffset)){
-        cockpit.pinballEvent("rFlip");
-        cockpit.handleHudEvents(p5,"RIGHT");
-      }
-      if((x>-155*xScale+xOffset&&x<145*xScale+xOffset&&y>-310*yScale+yOffset&&y<-10*yScale+yOffset)){
-        cockpit.handleHudEvents(p5,"ENTER");
-        cockpit.pinballEvent("ENTER");
-        cockpit.musicEvent("ENTER");
-      }
-      if((x>-30*xScale+xOffset&&x<20*xScale+xOffset&&y>115*yScale+yOffset&&y<165*yScale+yOffset)){
-        cockpit.handleHudEvents(p5,"ESC");
-        cockpit.pinballEvent("ESC");
-      }
+    if((x>p5.windowWidth*0.55&&x<p5.windowWidth&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.6)){
+      cockpit.pinballEvent("rFlip");
+      cockpit.handleHudEvents(p5,"RIGHT");
+    }
+    if((x>p5.windowWidth*0.45&&x<p5.windowWidth*0.55&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.6)){
+      cockpit.handleHudEvents(p5,"ENTER");
+      cockpit.pinballEvent("ENTER");
+      cockpit.musicEvent("ENTER");
+    }
+    if((x>0&&x<p5.windowWidth&&y>p5.windowHeight*0.8&&y<p5.windowHeight)){
+      cockpit.handleHudEvents(p5,"ESC");
+      cockpit.pinballEvent("ESC");
+    }
+    if((x>0&&x<p5.windowWidth&&y>0&&y<p5.windowHeight*0.2)){
+      cockpit.pinballEvent("move");
     }
   }
 
