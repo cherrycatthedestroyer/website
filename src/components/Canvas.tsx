@@ -4,11 +4,10 @@ import p5Type from "p5";
 import StarField from "../scripts/starField";
 import Cockpit from "../scripts/cockpit";
 
-
-
 function Canvas(){
   let starfield: StarField;
   let cockpit: Cockpit;
+
   const setup = (p5: p5Type, canvasParentRef: Element) =>{
     let cnv = p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
     starfield = new StarField(p5.windowWidth,p5.windowHeight,50,p5);
@@ -92,8 +91,7 @@ function Canvas(){
     }
   }
 
-  const update = (p5: p5Type) =>{
-  }
+  const update = (p5: p5Type) =>{}
 
   const response= (p5: p5Type) =>{
     p5.resizeCanvas(p5.windowWidth,p5.windowHeight);

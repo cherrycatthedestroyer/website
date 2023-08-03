@@ -3,6 +3,7 @@ import Matter from "matter-js";
 import Ball from "./ball"
 import Flipper from "./flipper"
 import PinballFrame from "./pinballFrame";
+import HeadingText from "./headingText";
 
 let Engine = Matter.Engine, Runner = Matter.Runner;
 
@@ -21,6 +22,8 @@ class Pinball {
   ball: Ball;
 
   font: p5Type.Font;
+  lArrow: HeadingText;
+  rArrow: HeadingText;
 
   constructor(width:number, height: number, p5:p5Type) {
     this.width = width;
@@ -34,6 +37,11 @@ class Pinball {
     this.flipperL = new Flipper(1, "LEFT",this.engine.world);
     this.flipperR = new Flipper(1, "RIGHT",this.engine.world);
     this.ball = new Ball(0,0,5,this.engine.world);
+
+    this.lArrow = new HeadingText("Left Arrow",15,width,height,p5);
+    this.rArrow = new HeadingText("Right Arrow",15,width,height,p5);
+    this.lArrow.select();
+    this.rArrow.select();
 
     this.score = 0;
     this.tries = 0;
@@ -82,6 +90,8 @@ class Pinball {
     else{
       p5.text("ARROW KEYS to flip",0,-218);
     }
+    this.lArrow.show(p5,-150,180,250);
+    this.rArrow.show(p5,150,180,250);
     this.pinballFrame.show(p5,this.ball);
     this.flipperL.show(p5);
     this.flipperR.show(p5);

@@ -1,13 +1,13 @@
 import p5Type from "p5";
 import Element from "./element";
+import PromptText from "./promptText";
+import HeadingText from "./headingText";
 
 class HUD {
-    logo: Element;
+    logo: HeadingText;
     arrowLeft: Element;
     arrowRight: Element;
-    //arrowMessageLeft: Element;
-    //arrowMessageRight: Element;
-    back: Element;
+    back: PromptText;
     grain: Element;
     grain2: Element;
     elementCount: number;
@@ -27,22 +27,16 @@ class HUD {
 
 
     constructor(p5:p5Type, path:string, width:number, height:number) {
-        this.logo = new Element(path, path, p5, 0,width,height);
+        this.logo = new HeadingText(path,80,width,height,p5);
         this.arrowLeft = new Element("assets/cleaned/placeholder.png",
         "assets/cleaned/lArrow_select.gif", p5, 0,width,height);
         this.arrowRight = new Element("assets/cleaned/placeholder.png",
         "assets/cleaned/rArrow_select.gif", p5, 0,width,height);
-        //this.arrowMessageLeft = new Element("assets/cleaned/placeholder.png",
-        //"assets/cleaned/lArrow_message.gif", p5, 0);
-        //this.arrowMessageRight = new Element("assets/cleaned/placeholder.png",
-        //"assets/cleaned/rArrow_message.gif", p5, 0);
-        this.back = new Element("assets/cleaned/back_message.gif",
-        "assets/cleaned/back_message.gif", p5, 0,width,height);
+        this.back = new PromptText("ESC",15,width,height,p5);
+        this.back.highlight();
         this.grain = new Element("assets/cleaned/grainDistort2.gif",
         "assets/cleaned/grainDistort.gif", p5, 0,width,height);
         this.grain2 = new Element("assets/cleaned/music_grain.gif","assets/cleaned/music_grain.gif",p5,0,width,height);
-        //this.arrowMessageLeft.unselect();
-        //this.arrowMessageRight.unselect();
         this.elementCount = 0;
         this.arrowROff = false;
         this.arrowLOff = true;
@@ -58,6 +52,7 @@ class HUD {
         this.ogHeight=755;
         this.xScale=width/this.ogWidth;
         this.yScale=height/this.ogHeight;
+        this.logo.select();
     }
 
     rightClick(p5: p5Type){
@@ -95,40 +90,10 @@ class HUD {
                 this.arrowROff=false;
             }
             this.opacityCounter+=5;
-            if(this.opacityCounter>255){
+            if(this.opacityCounter>200){
                 this.state="on";
                 this.grain.unselect();
             }
-        }
-        else if (this.state=="on"){
-            /*
-            if (this.idleCounter<350){
-                this.idleCounter++;
-                if (this.idleCounter>250){
-                    this.back.unselect();
-                    if (!this.arrowLOff){
-                        this.arrowLeft.unselect();
-                        this.arrowMessageLeft.select();
-                    }
-                    if (!this.arrowROff){
-                        this.arrowRight.unselect();
-                        this.arrowMessageRight.select();
-                    }
-                }
-            }
-            else{
-                this.idleCounter = 0;
-                this.back.select();
-                this.arrowMessageLeft.unselect();
-                this.arrowMessageRight.unselect();
-                if (!this.arrowLOff){
-                    this.arrowLeft.select();
-                }
-                if (!this.arrowROff){
-                    this.arrowRight.select();
-                }
-            }
-            */
         }
         else if (this.state=="close"){
             this.grain.select();
@@ -158,12 +123,11 @@ class HUD {
             this.arrowLOff? this.arrowLeft.unselect():this.arrowLeft.select();
             this.arrowLeft.show(p5,-265,180);
             
-            //this.arrowMessageLeft.show(p5,-290,240);
             this.arrowROff? this.arrowRight.unselect():this.arrowRight.select();
             this.arrowRight.show(p5,160,175);
-            //this.arrowMessageRight.show(p5,180,240);
+
             if (this.hudType!=="home"){
-                this.back.show(p5,-47,132);
+                this.back.show(p5,-14,152,this.opacityCounter);
             }
             p5.blendMode(p5.SCREEN);
             this.grain.show(p5,140,175);

@@ -1,31 +1,30 @@
 import p5Type from "p5";
 import HUD from "./hud";
-import Element from "./element";
+import HeadingText from "./headingText";
+import BodyText from "./bodyText";
+import PromptText from "./promptText";
 
 class Project extends HUD {
-    infoHeading: Element;
-    info: Element;
-    stackHeading: Element;
-    stack: Element;
-    linkHeading: Element;
-    link: Element;
+    infoHeading: HeadingText;
+    info1: BodyText;
+    stackHeading: HeadingText;
+    stack: BodyText;
+    linkHeading: HeadingText;
+    link: PromptText;
 
     constructor(p5:p5Type,path:string,width:number, height:number) {
         super(p5,path,width,height);
-        this.info=new Element("assets/cleaned/placeholder.png",
-        "assets/cleaned/placeholder.png", p5, 0,width,height);
-        this.stack=new Element("assets/cleaned/placeholder.png",
-        "assets/cleaned/placeholder.png", p5, 0,width,height);
-        this.link=new Element("assets/cleaned/placeholder.png",
-        "assets/cleaned/placeholder.png", p5, 0,width,height);
-        this.infoHeading=new Element("assets/cleaned/project_info_unselected.gif",
-        "assets/cleaned/project_info_selected.gif", p5, 0,width,height);
-        this.stackHeading=new Element("assets/cleaned/project_stack_unselected.gif",
-        "assets/cleaned/project_stack_selected.gif", p5, 0,width,height);
-        this.linkHeading=new Element("assets/cleaned/project_links_unselected.gif",
-        "assets/cleaned/project_links_selected.gif", p5, 0,width,height);
+        this.info1= new BodyText("SpaceBall is a digital pinball simulator that initially started out\nas an interface for a physical one powered by an Arduino.\nTo make use of it as a portfolio piece, I ported my original\ncode from processing to React-p5 and created a digital version\nof the pinball machine using Matter js."
+        ,13,width,height,p5);
+        this.stack=new BodyText(". React\n. Typescript\n. React-p5\n. Arduino\n. Processing",13,width,height,p5);
+        this.link=new PromptText("press ENTER to view",15,width,height,p5);
+        this.infoHeading= new HeadingText("Info",20,width,height,p5);
+        this.stackHeading= new HeadingText("Stack",20,width,height,p5);
+        this.linkHeading= new HeadingText("Links",20,width,height,p5);
         this.hudType="project";
         this.escPage="projectSearch";
+        this.info1.setToPara(p5);
+        this.stack.setToPara(p5);
     }
 
     show(p5: p5Type) {
