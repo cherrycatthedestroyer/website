@@ -59,11 +59,9 @@ function Canvas(){
     let y = p5.mouseY;
     if((x>0&&x<p5.windowWidth*0.45&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
       cockpit.pinballEvent("lFlip");
-      cockpit.handleHudEvents(p5,"LEFT");
     }
     if((x>p5.windowWidth*0.55&&x<p5.windowWidth&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
       cockpit.pinballEvent("rFlip");
-      cockpit.handleHudEvents(p5,"RIGHT");
     }
     if((x>p5.windowWidth*0.45&&x<p5.windowWidth*0.55&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
       cockpit.handleHudEvents(p5,"ENTER");
@@ -76,6 +74,17 @@ function Canvas(){
     }
     if((x>0&&x<p5.windowWidth&&y>0&&y<p5.windowHeight*0.2)){
       cockpit.pinballEvent("move");
+    }
+  }
+
+  const handleSwipe = (p5: p5Type) =>{
+    let x = p5.mouseX;
+    let y = p5.mouseY;
+    if(p5.mouseX-p5.pmouseX<-30){
+      cockpit.handleHudEvents(p5,"LEFT");
+    }
+    if(p5.mouseX-p5.pmouseX>30){
+      cockpit.handleHudEvents(p5,"RIGHT");
     }
   }
 
@@ -94,6 +103,7 @@ function Canvas(){
     windowResized={response}
     preload={preloader}
     mouseClicked={handleClick}
+    mouseDragged={handleSwipe}
   />);
 }
 

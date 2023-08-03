@@ -20,7 +20,7 @@ class Fishingsim extends Project {
     show(p5: p5Type,isMobile:boolean) {
         super.show(p5,isMobile);
         let offset;
-        isMobile?p5.scale(1.1,1.1):p5.scale(0.9,0.9);
+        isMobile?p5.scale(1.5,1.5):p5.scale(0.9,0.9);
         isMobile?offset=120:offset=0;
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);

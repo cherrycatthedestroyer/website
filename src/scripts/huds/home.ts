@@ -27,8 +27,9 @@ class Home extends HUD {
     show(p5: p5Type, isMobile:boolean) {
         super.show(p5,isMobile);
         let offset;
-        isMobile?p5.scale(1.1,1.1):p5.scale(0.9,0.9);
+        isMobile?p5.scale(1.5,1.5):p5.scale(0.9,0.9);
         isMobile?offset=130:offset=0;
+        isMobile?this.enterElement.inputText="SWIPE and TAP to select":this.enterElement.inputText="press ENTER to select";
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);
             this.logo.show(p5,-7,-220+offset,this.opacityCounter);
