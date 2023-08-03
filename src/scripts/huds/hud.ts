@@ -140,6 +140,11 @@ class HUD {
                 p5.blendMode(p5.BLEND);
             }
             else{
+                this.arrowLOff? this.arrowLeft.unselect():this.arrowLeft.select();
+                this.arrowLeft.show(p5,-420,-90);
+                
+                this.arrowROff? this.arrowRight.unselect():this.arrowRight.select();
+                this.arrowRight.show(p5,350,-90);
                 if (this.hudType!=="home"){
                     this.back.inputText="Tap to Escape";
                     this.back.show(p5,-14,250,this.opacityCounter);

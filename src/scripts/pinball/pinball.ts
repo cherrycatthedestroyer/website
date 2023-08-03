@@ -92,8 +92,8 @@ class Pinball {
     }
     isMobile?this.lArrow.inputText="Tap Left":this.lArrow.inputText="Left Arrow";
     isMobile?this.rArrow.inputText="Tap Right":this.rArrow.inputText="Right Arrow";
-    this.lArrow.show(p5,-150,180,250);
-    this.rArrow.show(p5,150,180,250);
+    this.lArrow.show(p5,-200,0,250);
+    this.rArrow.show(p5,200,0,250);
     this.pinballFrame.show(p5,this.ball);
     this.flipperL.show(p5);
     this.flipperR.show(p5);
