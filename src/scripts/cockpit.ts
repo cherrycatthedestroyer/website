@@ -139,7 +139,7 @@ class Cockpit {
         p5.push();
         p5.translate(this.width/2,this.height/2);
         p5.scale(1.2);
-        this.update(p5,isMobile);
+        this.update(p5);
         let calcAngle = p5.map(Math.sin(this.cockpitAngle),-1,1,p5.radians(-Math.PI/2),p5.radians(Math.PI/2));
         if (isMobile===false){
             p5.rotate(calcAngle);

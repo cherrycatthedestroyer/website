@@ -34,19 +34,19 @@ function Canvas(){
   const handleKeyRelease = (p5: p5Type) =>{
     if(p5.keyCode == p5.LEFT_ARROW){
       cockpit.pinballEvent("lFlip");
-      cockpit.handleHudEvents(p5,"LEFT");
+      cockpit.handleHudEvents(p5,"LEFT",isMobile(p5));
     }
     if(p5.keyCode == p5.RIGHT_ARROW){
       cockpit.pinballEvent("rFlip");
-      cockpit.handleHudEvents(p5,"RIGHT");
+      cockpit.handleHudEvents(p5,"RIGHT",isMobile(p5));
     }
     if(p5.keyCode == p5.ENTER){
-      cockpit.handleHudEvents(p5,"ENTER");
+      cockpit.handleHudEvents(p5,"ENTER",isMobile(p5));
       cockpit.pinballEvent("ENTER");
       cockpit.musicEvent("ENTER");
     }
     if(p5.keyCode == p5.ESCAPE){
-      cockpit.handleHudEvents(p5,"ESC");
+      cockpit.handleHudEvents(p5,"ESC",isMobile(p5));
       cockpit.pinballEvent("ESC");
     }
     if(p5.keyCode == 32){
@@ -64,12 +64,12 @@ function Canvas(){
       cockpit.pinballEvent("rFlip");
     }
     if((x>p5.windowWidth*0.45&&x<p5.windowWidth*0.55&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
-      cockpit.handleHudEvents(p5,"ENTER");
+      cockpit.handleHudEvents(p5,"ENTER",isMobile(p5));
       cockpit.pinballEvent("ENTER");
       cockpit.musicEvent("ENTER");
     }
     if((x>0&&x<p5.windowWidth&&y>p5.windowHeight*0.8&&y<p5.windowHeight)){
-      cockpit.handleHudEvents(p5,"ESC");
+      cockpit.handleHudEvents(p5,"ESC",isMobile(p5));
       cockpit.pinballEvent("ESC");
     }
     if((x>0&&x<p5.windowWidth&&y>0&&y<p5.windowHeight*0.2)){
@@ -81,10 +81,10 @@ function Canvas(){
     let x = p5.mouseX;
     let y = p5.mouseY;
     if(p5.mouseX-p5.pmouseX<40){
-      cockpit.handleHudEvents(p5,"LEFT");
+      cockpit.handleHudEvents(p5,"LEFT",isMobile(p5));
     }
     if(p5.mouseX-p5.pmouseX>-40){
-      cockpit.handleHudEvents(p5,"RIGHT");
+      cockpit.handleHudEvents(p5,"RIGHT",isMobile(p5));
     }
   }
 
