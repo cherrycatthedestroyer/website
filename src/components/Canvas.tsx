@@ -80,10 +80,10 @@ function Canvas(){
   const handleSwipe = (p5: p5Type) =>{
     let x = p5.mouseX;
     let y = p5.mouseY;
-    if(p5.mouseX-p5.pmouseX<20 || p5.mouseY-p5.pmouseY<-20){
+    if(p5.mouseX-p5.pmouseX<40 || p5.mouseY-p5.pmouseY<-40){
       cockpit.handleHudEvents(p5,"LEFT");
     }
-    if(p5.mouseX-p5.pmouseX>-20 || p5.mouseY-p5.pmouseY>20){
+    if(p5.mouseX-p5.pmouseX>-40 || p5.mouseY-p5.pmouseY>40){
       cockpit.handleHudEvents(p5,"RIGHT");
     }
   }
