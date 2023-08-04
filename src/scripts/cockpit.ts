@@ -51,12 +51,12 @@ class Cockpit {
         this.hudScreens.forEach( e => e.show(p5,isMobile));
     }
 
-    handleHudEvents(p5: p5Type, action:string){
+    handleHudEvents(p5: p5Type, action:string,isMobile:boolean){
         let currentScreen = this.hudScreens[this.currentScreenIndex];
         let newScreenIndex=0;
         if(this.screen.state=="off"){
-            if (action=="LEFT"){currentScreen.leftClick(p5);this.radio.ambient[2].play();}
-            if (action=="RIGHT"){currentScreen.rightClick(p5);this.radio.ambient[2].play();}
+            if (action=="LEFT"){currentScreen.leftClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
+            if (action=="RIGHT"){currentScreen.rightClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
             if (action=="ENTER"&&currentScreen.escPage!="projectSearch"
             &&currentScreen.hudType!="music"&&currentScreen.hudType!="skills"){
                 this.hudScreens.forEach(e => {
@@ -139,7 +139,7 @@ class Cockpit {
         p5.push();
         p5.translate(this.width/2,this.height/2);
         p5.scale(1.2);
-        this.update(p5);
+        this.update(p5,isMobile);
         let calcAngle = p5.map(Math.sin(this.cockpitAngle),-1,1,p5.radians(-Math.PI/2),p5.radians(Math.PI/2));
         if (isMobile===false){
             p5.rotate(calcAngle);
