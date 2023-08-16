@@ -38,8 +38,8 @@ class Pinball {
     this.flipperR = new Flipper(1, "RIGHT",this.engine.world);
     this.ball = new Ball(0,0,5,this.engine.world);
 
-    this.lArrow = new HeadingText("Left Arrow",15,width,height,p5);
-    this.rArrow = new HeadingText("Right Arrow",15,width,height,p5);
+    this.lArrow = new HeadingText("Left Arrow",15,width,height,"larrow",p5);
+    this.rArrow = new HeadingText("Right Arrow",15,width,height,"rarrow",p5);
     this.lArrow.select();
     this.rArrow.select();
 

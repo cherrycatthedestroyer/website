@@ -12,7 +12,7 @@ class Faceflute extends Project {
         this.info1= new BodyText("FaceFlute lets users creating music using facial expressions.\nFaceApi js is used to determine facial expressions which I then\nmap to musical notes using Tone Js. I originally wanted to use\nMagenta to generate different patterns rather than single\nnotes but it was not compatible with FaceApi js."
         ,13,width,height,p5);
         this.stack=new BodyText(". Javascript\n. FaceApi js\n. Tone Js",13,width,height,p5);
-        this.link=new PromptText("press ENTER to view",15,width,height,p5);
+        this.link=new PromptText("press ENTER to view",15,width,height,"link",p5);
         this.info1.setToPara(p5);
         this.stack.setToPara(p5);
     }

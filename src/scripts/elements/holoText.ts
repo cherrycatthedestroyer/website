@@ -13,8 +13,12 @@ class HoloText {
     size:number;
     color: number[];
     state: string;
+    x: number;
+    y: number;
+    name: string;
+    isVisible: boolean;
 
-    constructor(input:string, size:number,width:number, height: number, p5:p5Type) {
+    constructor(input:string, size:number,width:number, height: number, name:string, p5:p5Type) {
         this.width = width;
         this.height = height;
         this.font = p5.loadFont("assets/roboto.otf");
@@ -27,6 +31,10 @@ class HoloText {
         this.yWaveSpeed = 0.05;
         this.color = [196, 196, 194,200];
         this.state = "unselected";
+        this.x = 0;
+        this.y = 0;
+        this.name = name;
+        this.isVisible = true;
     }
 
     setTracking(tracking:number){
@@ -94,9 +102,84 @@ class HoloText {
 
     dummy(){}
 
+    isClicked(x: number, y: number,p5: p5Type,isMobile: boolean,width:number,height:number):boolean{
+        this.width = width;
+        this.height = height;
+        let inBounds = false;
+        let newX = (x - this.width/2)*1.2*1.5;
+        let newY = (y - this.height/2)*1.2*1.5;
+        if (isMobile===false){
+            newX = (x - this.width/2)*1.2*0.9;
+            newY = (y - this.height/2)*1.2*0.9;
+            if (x>this.width*0.4&&x<this.width*0.6){
+                if (this.name==="track1"){
+                    if (y>this.height*0.2&&y<this.height*0.22){
+                        return true;
+                    }
+                }
+                else if (this.name==="track2"){
+                    if (y>this.height*0.25&&y<this.height*0.27){
+                        return true;
+                    }
+                }
+                else if (this.name==="track3"){
+                    if (y>this.height*0.3&&y<this.height*0.32){
+                        return true;
+                    }
+                }
+            }
+        }
+        if (this.name!=="page1"&&this.name!=="page2"){
+            if (this.name==="back"){
+                newX = (x - this.width/2);
+                newY = (y - this.height/2);
+            }
+            if (newX>this.x-(this.inputText.length*this.tracking)/2&&newX<this.x+(this.inputText.length*this.tracking)/2&&this.isVisible===true&&
+            this.name!=="track1"&&this.name!=="track2"&&this.name!=="track3"
+            ){
+                if (this.name==="enter"){
+                    if (newY>this.y+100&&newY<this.y+150){
+                        inBounds=true
+                    }
+                }
+                else if (this.name==="back"){
+                    if (newY>this.y-50&&newY<this.y+50){
+                        inBounds=true
+                    }
+                }
+                else{
+                    if (newY>this.y-250&&newY<this.y+50){
+                        inBounds=true
+                    }
+                }
+            }
+            //this.name==="track1"||this.name==="track2"||this.name==="track3"
+            if (x>this.width*0.3&&x<this.width*0.7&&(this.name==="track1"||this.name==="track2"||this.name==="track3")){
+                if (this.name==="track1"){
+                    if (y>this.height*0.4&&y<this.height*0.44){
+                        return true;
+                    }
+                }
+                else if (this.name==="track2"){
+                    if (y>this.height*0.48&&y<this.height*0.52){
+                        return true;
+                    }
+                }
+                else if (this.name==="track3"){
+                    if (y>this.height*0.58&&y<this.height*0.62){
+                        return true;
+                    }
+                }
+            }
+        }
+        return inBounds;
+    }
+
     show(p5: p5Type,x:number, y:number,opacity:number) {
         this.update(p5);
         p5.push();
+        this.x = x;
+        this.y = y;
         p5.translate(x,y);
         p5.translate(-(this.inputText.length-1)*this.tracking/2,0);
         p5.textFont(this.font);

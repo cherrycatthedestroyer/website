@@ -2,7 +2,6 @@ import p5Type from "p5";
 import HUD from "./hud";
 import HeadingText from "../elements/headingText";
 import PromptText from "../elements/promptText";
-import { off } from "process";
 
 class Home extends HUD {
     homeElement1: HeadingText;
@@ -12,16 +11,16 @@ class Home extends HUD {
 
     constructor(p5:p5Type, width:number, height:number) {
         super(p5,"JOSH JOB",width,height);
-        this.homeElement1 = new HeadingText("Projects",20,width,height,p5);
-        this.homeElement2 = new HeadingText("Skills",20,width,height,p5);
-        this.homeElement3 = new HeadingText("Music",20,width,height,p5);
-        this.enterElement = new PromptText("Press ENTER to select",15,width,height,p5);
+        this.homeElement1 = new HeadingText("Projects",20,width,height,"projectSearch",p5);
+        this.homeElement2 = new HeadingText("Skills",20,width,height,"skills",p5);
+        this.homeElement3 = new HeadingText("Music",20,width,height,"music",p5);
+        this.enterElement = new PromptText("Press ENTER to select",15,width,height,"enter",p5);
         this.homeElement1.select();
         this.homeElement2.unselect();
         this.homeElement3.unselect();
         this.hudType="home";
         this.elementList = ["projectSearch","skills","music"];
-        //this.logo.setTracking(this.logo.tracking*0.8);
+        this.buttonList = [this.homeElement1,this.homeElement2,this.homeElement3];
     }
 
     show(p5: p5Type, isMobile:boolean) {
@@ -29,7 +28,7 @@ class Home extends HUD {
         let offset;
         isMobile?p5.scale(1.5,1.5):p5.scale(0.9,0.9);
         isMobile?offset=130:offset=0;
-        isMobile?this.enterElement.inputText="SWIPE and TAP to select":this.enterElement.inputText="press ENTER to select";
+        isMobile?this.enterElement.inputText="TAP to select":this.enterElement.inputText="press ENTER to select";
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);
             this.logo.show(p5,-7,-220+offset,this.opacityCounter);

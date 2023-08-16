@@ -12,7 +12,7 @@ class Vibecheck extends Project {
         this.info1= new BodyText("A mobile game that has users input a song of their choice \nbased on a topic and then challenges them to guess who \npicked which song when they are played back. I developed\nthe app on Android Studio and used the Spotify API to access\na large database of songs for info and playback."
         ,13,width,height,p5);
         this.stack=new BodyText(". Java\n. Spotify Api",13,width,height,p5);
-        this.link=new PromptText("press ENTER to watch demo",15,width,height,p5);
+        this.link=new PromptText("press ENTER to watch demo",15,width,height,"enter",p5);
         this.info1.setToPara(p5);
         this.stack.setToPara(p5);
     }

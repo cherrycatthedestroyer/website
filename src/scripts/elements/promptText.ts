@@ -2,8 +2,8 @@ import p5Type from "p5";
 import HoloText from "./holoText";
 
 class PromptText extends HoloText {
-    constructor(input:string, size:number,width:number, height: number, p5:p5Type) {
-        super(input,size,width,height,p5);
+    constructor(input:string, size:number,width:number, height: number, name:string, p5:p5Type) {
+        super(input,size,width,height,name,p5);
         this.font = p5.loadFont("assets/robotoB.otf");
         this.tracking = size-7;
         this.yWave = 1;

@@ -15,7 +15,7 @@ class Skills extends Project {
         this.stack=new BodyText(". HTML\n. CSS\n. Javascript\n. Typescript\n. Java",13,width,height,p5);
         this.stack2=new BodyText(". EJS\n. React\n. Node\n. P5js\n. Next",13,width,height,p5);
         this.stack3=new BodyText(". Figma\n. Photoshop\n. AfterEffects\n. Premiere\n. Reaper",13,width,height,p5);
-        this.link=new PromptText("press ENTER to view resume",15,width,height,p5);
+        this.link=new PromptText("press ENTER to view resume",15,width,height,"enter",p5);
         this.info1.setToPara(p5);
         this.stack.setToPara(p5);
         this.stack2.setToPara(p5);

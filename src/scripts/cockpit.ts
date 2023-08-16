@@ -46,7 +46,6 @@ class Cockpit {
         }
     }
 
-
     showHuds(p5: p5Type,isMobile:boolean){
         this.hudScreens.forEach( e => e.show(p5,isMobile));
     }

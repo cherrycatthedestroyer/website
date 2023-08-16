@@ -8,7 +8,7 @@ class Spaceball extends Project {
         this.hudType="spaceball";
         this.escPage="projectSearch";
     }
-
+ 
     show(p5: p5Type,isMobile:boolean) {
         super.show(p5,isMobile);
         let offset,offsetX,offset2,infoOffset;
@@ -24,7 +24,7 @@ class Spaceball extends Project {
             this.infoHeading.show(p5,-150+offsetX,-170+offset+offset2,this.opacityCounter);
             this.elementCount==1? this.stackHeading.select():this.stackHeading.unselect() ;
             this.stackHeading.show(p5,-77+offsetX,-170+offset+offset2,this.opacityCounter);
-            this.elementCount==2? this.linkHeading.select():this.linkHeading.unselect() ;
+            this.elementCount==2? this.linkHeading.select():this.linkHeading.unselect();
             this.linkHeading.show(p5,0+offsetX,-170+offset+offset2,this.opacityCounter);
             if (this.elementCount==0){
                 isMobile?p5.scale(1.5,1):p5.scale(1,1);

@@ -2,6 +2,7 @@ import p5Type from "p5";
 import Element from "../elements/element";
 import PromptText from "../elements/promptText";
 import HeadingText from "../elements/headingText";
+import HoloText from "../elements/holoText";
 
 class HUD {
     logo: HeadingText;
@@ -17,6 +18,7 @@ class HUD {
     state:string;
     hudType:string;
     elementList: string[];
+    buttonList: HoloText[];
     idleCounter: number;
     escPage:string;
     specialIndex:number;
@@ -25,14 +27,13 @@ class HUD {
     xScale:number;
     yScale:number;
 
-
     constructor(p5:p5Type, path:string, width:number, height:number) {
-        this.logo = new HeadingText(path,80,width,height,p5);
+        this.logo = new HeadingText(path,80,width,height,path,p5);
         this.arrowLeft = new Element("assets/cleaned/placeholder.png",
         "assets/cleaned/lArrow_select.gif", p5, 0,width,height);
         this.arrowRight = new Element("assets/cleaned/placeholder.png",
         "assets/cleaned/rArrow_select.gif", p5, 0,width,height);
-        this.back = new PromptText("ESC",15,width,height,p5);
+        this.back = new PromptText("ESC",15,width,height,"back",p5);
         this.back.highlight();
         this.grain = new Element("assets/cleaned/grainDistort2.gif",
         "assets/cleaned/grainDistort.gif", p5, 0,width,height);
@@ -53,6 +54,7 @@ class HUD {
         this.xScale=width/this.ogWidth;
         this.yScale=height/this.ogHeight;
         this.logo.select();
+        this.buttonList = [];
     }
 
     rightClick(p5: p5Type){
@@ -83,6 +85,17 @@ class HUD {
         }
     }
 
+    handleClick(x: number, y: number,p5: p5Type, isMobile:boolean,width:number,height:number):string{
+        let action = "";
+        this.buttonList.forEach(e => {
+            if (e.isClicked(x,y,p5,isMobile,width,height)){
+                action=e.name;
+                console.log(e.name);
+            }
+        })
+        return action;
+    }
+
     update(){
         if(this.state=="boot"){
             if(this.opacityCounter<1){
@@ -100,6 +113,18 @@ class HUD {
             this.opacityCounter=0;
             this.elementCount=0;
             this.state = "off";
+        }
+        if (this.state=="on"){
+            if (this.elementCount==2){
+                this.arrowROff = true;
+            }
+            if (this.elementCount==1){
+                this.arrowLOff = false;
+                this.arrowROff = false;
+            }
+            if (this.elementCount==0){
+                this.arrowLOff = true;
+            }
         }
     }
 
@@ -148,4 +173,5 @@ class HUD {
         }
     }
 }
+
 export default HUD;

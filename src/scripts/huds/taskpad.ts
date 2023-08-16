@@ -12,7 +12,7 @@ class Taskpad extends Project {
         this.info1= new BodyText("A note taking app in the style of  Google’s Keeper. This was my\nfirst full React project using Typescript."
         ,13,width,height,p5);
         this.stack=new BodyText(". React\n. Typescript",13,width,height,p5);
-        this.link=new PromptText("press ENTER to view",15,width,height,p5);
+        this.link=new PromptText("press ENTER to view",15,width,height,"enter",p5);
         this.info1.setToPara(p5);
         this.stack.setToPara(p5);
     }

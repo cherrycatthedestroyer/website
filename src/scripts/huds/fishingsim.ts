@@ -12,7 +12,7 @@ class Fishingsim extends Project {
         this.info1= new BodyText("A fishing simulator which allows the user to catch different \ntypes of fish depending on the bait used and the time of day.\nThere are some more mysterious creatures swimming around\nthat may have to be caught using different methods ..."
         ,13,width,height,p5);
         this.stack=new BodyText(". Java\n. Figma",13,width,height,p5);
-        this.link=new PromptText("press ENTER to view",15,width,height,p5);
+        this.link=new PromptText("press ENTER to view",15,width,height,"link",p5);
         this.info1.setToPara(p5);
         this.stack.setToPara(p5);
     }

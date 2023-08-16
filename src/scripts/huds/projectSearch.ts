@@ -10,24 +10,29 @@ class ProjectSearch extends HUD {
     element3: HeadingText;
     element4: HeadingText;
     element5: HeadingText;
+    pageRight: PromptText;
+    pageLeft: PromptText;
     enterElement: PromptText;
     tabber: Element;
     currentRow: number;
 
     constructor(p5:p5Type,width:number, height:number) {
         super(p5,"PROJECTS",width,height);
-        this.element1 = new HeadingText("SpaceBall",20,width,height,p5);
-        this.element2 = new HeadingText("TaskPad",20,width,height,p5);
-        this.element3 = new HeadingText("Faceflute",20,width,height,p5);
-        this.element4 = new HeadingText("Vibecheck",20,width,height,p5);
-        this.element5 = new HeadingText("FishingSim",20,width,height,p5);
-        this.enterElement = new PromptText("Press ENTER to select",15,width,height,p5);
+        this.element1 = new HeadingText("SpaceBall",20,width,height,"spaceball",p5);
+        this.element2 = new HeadingText("TaskPad",20,width,height,"taskpad",p5);
+        this.element3 = new HeadingText("Faceflute",20,width,height,"faceflute",p5);
+        this.element4 = new HeadingText("Vibecheck",20,width,height,"vibecheck",p5);
+        this.element5 = new HeadingText("FishingSim",20,width,height,"fishingsim",p5);
+        this.enterElement = new PromptText("Press ENTER to select",15,width,height,"enter",p5);
+        this.pageRight = new PromptText("tap for PAGE 2",15,width,height,"page2",p5);
+        this.pageLeft = new PromptText("tap for PAGE 1",15,width,height,"page1",p5);
         this.tabber = new Element("assets/cleaned/tracker_2.gif",
         "assets/cleaned/tracker_1.gif", p5, 0.02,width,height);
         this.element2.select();
         this.currentRow = 0;
         this.hudType="projectSearch";
         this.elementList = ["spaceball","taskpad","faceflute","vibecheck","fishingsim"];
+        this.buttonList = [this.element1,this.element2,this.element3,this.element4,this.element5,this.back];
     }
 
     rightClick(p5: p5Type){
@@ -58,12 +63,50 @@ class ProjectSearch extends HUD {
         }
     }
 
+    update(){
+        if(this.state=="boot"){
+            if(this.opacityCounter<1){
+                this.arrowLOff=true;
+                this.arrowROff=false;
+            }
+            this.opacityCounter+=5;
+            if(this.opacityCounter>200){
+                this.state="on";
+                this.grain.unselect();
+            }
+        }
+        else if (this.state=="close"){
+            this.grain.select();
+            this.opacityCounter=0;
+            this.elementCount=0;
+            this.state = "off";
+        }
+        if (this.state=="on"){
+            if (this.elementCount>0){
+                if (this.elementCount==0){
+                    this.arrowLOff = true;
+                }
+                if (this.elementCount==3||this.elementCount==1){
+                    this.arrowROff = false;
+                }
+            }
+            else if (this.elementCount<4){
+                if (this.elementCount==4){
+                    this.arrowROff = true;
+                }
+                if (this.elementCount==1){
+                    this.arrowLOff = false;
+                }
+            }
+        }
+    }
+
     show(p5: p5Type,isMobile:boolean) {
         super.show(p5,isMobile);
         let offset;
         isMobile?p5.scale(1.5,1.5):p5.scale(0.9,0.9);
         isMobile?offset=120:offset=0;
-        isMobile?this.enterElement.inputText="SWIPE and TAP to select":this.enterElement.inputText="press ENTER to select";
+        isMobile?this.enterElement.inputText="TAP to select":this.enterElement.inputText="press ENTER to select";
         if (this.state=="boot"||this.state=="on"||this.state=="close"){
             p5.tint(255,this.opacityCounter);
             this.logo.show(p5,-7,-220+offset,this.opacityCounter);
@@ -75,7 +118,17 @@ class ProjectSearch extends HUD {
                 this.elementCount==2? this.element3.select():this.element3.unselect() ;
                 this.element3.show(p5,120,-160+offset,this.opacityCounter);
                 this.tabber.select();
-                
+                this.element1.isVisible = true;
+                this.element2.isVisible = true;
+                this.element3.isVisible = true;
+                this.element4.isVisible = false;
+                this.element5.isVisible = false;
+                p5.push();
+                p5.angleMode(p5.DEGREES);
+                p5.rotate(90);
+                this.pageRight.select();
+                isMobile?this.pageRight.show(p5,0,-this.ogWidth*0.5/2,this.opacityCounter):this.pageRight.dummy();
+                p5.pop();
             }
             else{
                 this.elementCount==3? this.element4.select():this.element4.unselect() ;
@@ -83,7 +136,19 @@ class ProjectSearch extends HUD {
                 this.elementCount==4? this.element5.select():this.element5.unselect() ;
                 this.element5.show(p5,0,-160+offset,this.opacityCounter);
                 this.tabber.unselect();
+                this.element1.isVisible = false;
+                this.element2.isVisible = false;
+                this.element3.isVisible = false;
+                this.element4.isVisible = true;
+                this.element5.isVisible = true;
+                p5.push();
+                p5.angleMode(p5.DEGREES);
+                p5.rotate(90);
+                this.pageLeft.select();
+                isMobile?this.pageLeft.show(p5,0,this.ogWidth*0.5/2,this.opacityCounter):this.pageLeft.dummy();
+                p5.pop();
             }
+            p5.angleMode(p5.RADIANS);
             this.tabber.show(p5, -20,-30+offset);
             this.enterElement.show(p5,-7,-70+offset,this.opacityCounter);
         }
