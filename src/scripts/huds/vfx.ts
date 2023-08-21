@@ -3,23 +3,18 @@ import Project from "./project";
 import BodyText from "../elements/bodyText";
 import PromptText from "../elements/promptText";
 
-class Skills extends Project {
-    stack2:BodyText;
-    stack3:BodyText;
+class VFX extends Project {
+
     constructor(p5:p5Type,width:number, height:number) {
-        super(p5,"SKILLS",width,height);
-        this.hudType="skills";
-        this.escPage="home";
-        this.info1= new BodyText("I am an accomplished Front-End Developer who enjoys making\nfun and engaging user experiences. My passion for learning new\nIDE’s allow me to understand any new workspace fast, while my\nartistic design background allows me to create unqiue and visually\nstunning applications. As a multimedia artist I also enjoy working\non film and music projects whether that be editing videos,\ncompositing/animating vfx, or music production.\n"
+        super(p5,"SHOWREEL",width,height);
+        this.hudType="vfx";
+        this.escPage="mediaSearch";
+        this.info1= new BodyText("I enjoy compositing and animating a variety of VFX. I enjoy looking\nat a script and creating visuals like trying to solve a puzzle. I work in\n2D with 3D perspective using motiontracking, keying, lighting and\nanimation. Click the LINK tab to see my full VFX showreel."
         ,13,width,height,p5);
-        this.stack=new BodyText(". HTML\n. CSS\n. Javascript\n. Typescript\n. Java",13,width,height,p5);
-        this.stack2=new BodyText(". EJS\n. React\n. Node\n. P5js\n. Next",13,width,height,p5);
-        this.stack3=new BodyText(". Figma\n. Photoshop\n. AfterEffects\n. Premiere\n. Reaper",13,width,height,p5);
-        this.link=new PromptText("press ENTER to view resume",15,width,height,"enter",p5);
+        this.stack=new BodyText(". Premiere\n. After Effects\n. Resolve\n. Figma\n. Photoshop\n. GIMP",13,width,height,p5);
+        this.link=new PromptText("press ENTER to view",15,width,height,"enter",p5);
         this.info1.setToPara(p5);
         this.stack.setToPara(p5);
-        this.stack2.setToPara(p5);
-        this.stack3.setToPara(p5);
     }
 
     show(p5: p5Type,isMobile:boolean) {
@@ -46,8 +41,6 @@ class Skills extends Project {
             else if (this.elementCount==1){
                 isMobile?p5.scale(1.5,1):p5.scale(1,1);
                 this.stack.show(p5,-170+infoOffset,-145+offset+offset2);
-                this.stack2.show(p5,-90+infoOffset,-145+offset+offset2);
-                this.stack3.show(p5,-10+infoOffset,-145+offset+offset2);
             }
             else if (this.elementCount==2){
                 this.link.show(p5,0,-80+offset,this.opacityCounter);
@@ -57,4 +50,4 @@ class Skills extends Project {
     }
 }
 
-export default Skills;
+export default VFX;

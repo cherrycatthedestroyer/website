@@ -131,13 +131,25 @@ function Canvas(){
           else if (currentScreen.hudType==="skills"){
             window.open("https://pdfhost.io/v/uPYk97dGP_joshjob_resume", '_blank');
           }
+          else if (currentScreen.hudType==="malaika"){
+            window.open("https://youtu.be/wwKDfcfcEOI", '_blank');
+          }
+          else if (currentScreen.hudType==="insupal"){
+            window.open("https://vimeo.com/282667508?share=copy", '_blank');
+          }
+          else if (currentScreen.hudType==="vfx"){
+            window.open("https://youtu.be/wT_2Efr8amg", '_blank');
+          }
+          else if (currentScreen.hudType==="crisp"){
+            window.open("https://vimeo.com/282667508?share=copy", '_blank');
+          }
         }
       }
   
-      if (nextScreen==="page2"&&currentScreen.hudType==="projectSearch"){
+      if (nextScreen==="page2"&&(currentScreen.hudType==="projectSearch"||currentScreen.hudType==="mediaSearch")){
         currentScreen.elementCount=3;
       }
-      if (nextScreen==="page1"){
+      if (nextScreen==="page1"&&(currentScreen.hudType==="projectSearch"||currentScreen.hudType==="mediaSearch")){
         currentScreen.elementCount=0;
       }
   
@@ -151,7 +163,7 @@ function Canvas(){
         cockpit.radio.ambient[3].play();
       }
   
-      if (currentScreen.hudType==="projectSearch"){
+      if (currentScreen.hudType==="projectSearch"||currentScreen.hudType==="mediaSearch"){
         if(x>0&&x<p5.windowWidth*0.25&&currentScreen.elementCount>=3){
           currentScreen.elementCount=0;
           cockpit.radio.ambient[1].play();

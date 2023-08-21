@@ -24,7 +24,7 @@ class Music extends HUD {
         this.prompt1= new PromptText("Press ENTER to play/pause",15,width,height,"enter",p5);
         this.buttonList = [this.track1,this.track2,this.track3,this.back];
         this.hudType="music";
-        this.escPage="home";
+        this.escPage="mediaSearch";
     }
 
     updateTimes(time:string){

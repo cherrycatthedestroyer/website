@@ -11,6 +11,11 @@ import Fishingsim from "./huds/fishingsim";
 import Music from "./huds/music";
 import MusicPlayer from "./musicPlayer";
 import Skills from "./huds/skills";
+import MediaSearch from "./huds/mediaSearch";
+import Malaika from "./huds/malaika";
+import Crisp from "./huds/crisp";
+import Insupal from "./huds/insupal";
+import VFX from "./huds/vfx";
 
 class Cockpit {
     width: number;
@@ -32,7 +37,8 @@ class Cockpit {
         [new Home(p5,width,height),
             new ProjectSearch(p5,width,height),new Spaceball(p5,width,height), new Taskpad(p5,width,height), 
             new Faceflute(p5,width,height), new Vibecheck(p5,width,height), new Fishingsim(p5,width,height),
-            new Music(p5,width,height), new Skills(p5,width,height)
+            new Music(p5,width,height), new Skills(p5,width,height), new MediaSearch(p5,width,height), new Malaika(p5,width,height),
+            new VFX(p5,width,height), new Insupal(p5,width,height), new Crisp(p5,width,height)
         ];
         this.radio = new MusicPlayer(p5);
         this.hudScreens[0].boot();
@@ -56,8 +62,8 @@ class Cockpit {
         if(this.screen.state=="off"){
             if (action=="LEFT"){currentScreen.leftClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
             if (action=="RIGHT"){currentScreen.rightClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
-            if (action=="ENTER"&&currentScreen.escPage!="projectSearch"
-            &&currentScreen.hudType!="music"&&currentScreen.hudType!="skills"){
+            if (action=="ENTER"&&currentScreen.escPage!="projectSearch"&&currentScreen.escPage!="mediaSearch"
+            &&currentScreen.hudType!="skills"){
                 this.hudScreens.forEach(e => {
                     if(e.hudType==currentScreen.elementList[currentScreen.elementCount]){
                         newScreenIndex = this.hudScreens.indexOf(e);}})
@@ -113,7 +119,27 @@ class Cockpit {
         }
         else if (currentScreen.hudType==="skills"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
-                window.open("https://pdfhost.io/v/uPYk97dGP_joshjob_resume", '_blank');
+                window.open("https://www.docdroid.net/HXLJnfg/joshjob-resume-full-pdf", '_blank');
+            }
+        }
+        else if (currentScreen.hudType=="malaika"){
+            if (action==="ENTER"&&currentScreen.elementCount===2){
+                window.open("https://youtu.be/wwKDfcfcEOI", '_blank');
+            }
+        }
+        else if (currentScreen.hudType=="insupal"){
+            if (action==="ENTER"&&currentScreen.elementCount===2){
+                window.open("https://vimeo.com/282667508?share=copy", '_blank');
+            }
+        }
+        else if (currentScreen.hudType=="crisp"){
+            if (action==="ENTER"&&currentScreen.elementCount===2){
+                window.open("https://vimeo.com/282667508?share=copy", '_blank');
+            }
+        }
+        else if (currentScreen.hudType=="vfx"){
+            if (action==="ENTER"&&currentScreen.elementCount===2){
+                window.open("https://youtu.be/wT_2Efr8amg", '_blank');
             }
         }
     }

@@ -13,13 +13,13 @@ class Home extends HUD {
         super(p5,"JOSH JOB",width,height);
         this.homeElement1 = new HeadingText("Projects",20,width,height,"projectSearch",p5);
         this.homeElement2 = new HeadingText("Skills",20,width,height,"skills",p5);
-        this.homeElement3 = new HeadingText("Music",20,width,height,"music",p5);
+        this.homeElement3 = new HeadingText("Media",20,width,height,"mediaSearch",p5);
         this.enterElement = new PromptText("Press ENTER to select",15,width,height,"enter",p5);
         this.homeElement1.select();
         this.homeElement2.unselect();
         this.homeElement3.unselect();
         this.hudType="home";
-        this.elementList = ["projectSearch","skills","music"];
+        this.elementList = ["projectSearch","skills","mediaSearch"];
         this.buttonList = [this.homeElement1,this.homeElement2,this.homeElement3];
     }
 
