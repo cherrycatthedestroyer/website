@@ -27,7 +27,9 @@ function Canvas(){
 
   const draw = (p5: p5Type) =>{
     p5.background(0);
-    starfield.show(p5,p5.windowWidth,p5.windowHeight);
+    if (isMobile(p5)===false){
+      starfield.show(p5,p5.windowWidth,p5.windowHeight);
+    }
     cockpit.show(p5,isMobile(p5),p5.windowWidth,p5.windowHeight);
   }
 
