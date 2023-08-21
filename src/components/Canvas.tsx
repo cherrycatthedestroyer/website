@@ -9,7 +9,7 @@ function Canvas(){
   let cockpit: Cockpit;
 
   const setup = (p5: p5Type, canvasParentRef: Element) =>{
-    let cnv = p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
+    p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
     starfield = new StarField(p5.windowWidth,p5.windowHeight,50,p5);
   }
 
@@ -34,24 +34,24 @@ function Canvas(){
   }
 
   const handleKeyRelease = (p5: p5Type) =>{
-    if(p5.keyCode == p5.LEFT_ARROW){
+    if(p5.keyCode === p5.LEFT_ARROW){
       cockpit.pinballEvent("lFlip");
       cockpit.handleHudEvents(p5,"LEFT",isMobile(p5));
     }
-    if(p5.keyCode == p5.RIGHT_ARROW){
+    if(p5.keyCode === p5.RIGHT_ARROW){
       cockpit.pinballEvent("rFlip");
       cockpit.handleHudEvents(p5,"RIGHT",isMobile(p5));
     }
-    if(p5.keyCode == p5.ENTER){
+    if(p5.keyCode === p5.ENTER){
       cockpit.handleHudEvents(p5,"ENTER",isMobile(p5));
       cockpit.pinballEvent("ENTER");
       cockpit.musicEvent("ENTER");
     }
-    if(p5.keyCode == p5.ESCAPE){
+    if(p5.keyCode === p5.ESCAPE){
       cockpit.handleHudEvents(p5,"ESC",isMobile(p5));
       cockpit.pinballEvent("ESC");
     }
-    if(p5.keyCode == 32){
+    if(p5.keyCode === 32){
       cockpit.pinballEvent("move");
     }
   } 
@@ -94,8 +94,8 @@ function Canvas(){
       }
     }
     else{
-      if (nextScreen!=""&&nextScreen!="info"&&nextScreen!="stack"&&nextScreen!="links"&&nextScreen!="back"&&nextScreen!="enter"&&
-      nextScreen!=="track1"&&nextScreen!=="track2"&&nextScreen!=="track3"
+      if (nextScreen!==""&&nextScreen!=="info"&&nextScreen!=="stack"&&nextScreen!=="links"&&nextScreen!=="back"&&nextScreen!=="enter"&&
+      nextScreen!=="track1"&&nextScreen!=="track2"&&nextScreen!=="track3"&&nextScreen!=="mediaSearch"
       ){
         cockpit.hudScreens.forEach(e => {
           if(e.hudType===nextScreen){
@@ -116,7 +116,7 @@ function Canvas(){
           currentScreen.elementCount=2;
         }
       }
-      if (nextScreen==="enter"&&currentScreen.hudType!="home"){
+      if (nextScreen==="enter"&&currentScreen.hudType!=="home"){
         if (currentScreen.elementCount===2){
           if (currentScreen.hudType==="taskpad"){
             window.open("https://taskpad.onrender.com/", '_blank');
@@ -133,31 +133,29 @@ function Canvas(){
           else if (currentScreen.hudType==="skills"){
             window.open("https://pdfhost.io/v/uPYk97dGP_joshjob_resume", '_blank');
           }
+          /*
           else if (currentScreen.hudType==="malaika"){
             window.open("https://youtu.be/wwKDfcfcEOI", '_blank');
           }
           else if (currentScreen.hudType==="insupal"){
             window.open("https://vimeo.com/282667508?share=copy", '_blank');
           }
-          else if (currentScreen.hudType==="vfx"){
-            window.open("https://youtu.be/wT_2Efr8amg", '_blank');
-          }
           else if (currentScreen.hudType==="crisp"){
             window.open("https://vimeo.com/282667508?share=copy", '_blank');
-          }
+          }*/
         }
       }
   
-      if (nextScreen==="page2"&&(currentScreen.hudType==="projectSearch"||currentScreen.hudType==="mediaSearch")){
+      if (nextScreen==="page2"&&(currentScreen.hudType==="projectSearch")){
         currentScreen.elementCount=3;
       }
-      if (nextScreen==="page1"&&(currentScreen.hudType==="projectSearch"||currentScreen.hudType==="mediaSearch")){
+      if (nextScreen==="page1"&&(currentScreen.hudType==="projectSearch")){
         currentScreen.elementCount=0;
       }
   
-      if (nextScreen==="back"&&currentScreen.hudType!="home"){
+      if (nextScreen==="back"&&currentScreen.hudType!=="home"){
         cockpit.hudScreens.forEach(e => {
-          if(e.hudType==currentScreen.escPage){
+          if(e.hudType===currentScreen.escPage){
               newScreenIndex = cockpit.hudScreens.indexOf(e);}})
         cockpit.hudScreens[newScreenIndex].boot();
         cockpit.currentScreenIndex=newScreenIndex;
@@ -165,7 +163,7 @@ function Canvas(){
         cockpit.radio.ambient[3].play();
       }
   
-      if (currentScreen.hudType==="projectSearch"||currentScreen.hudType==="mediaSearch"){
+      if (currentScreen.hudType==="projectSearch"){
         if(x>0&&x<p5.windowWidth*0.25&&currentScreen.elementCount>=3){
           currentScreen.elementCount=0;
           cockpit.radio.ambient[1].play();
@@ -189,6 +187,10 @@ function Canvas(){
         }
       }
 
+      if (nextScreen==="mediaSearch"&&currentScreen.hudType==="home"){
+        window.open("https://youtu.be/wT_2Efr8amg", '_blank');
+      }
+
       if (!isMobile(p5)&&cockpit.screen.state==="off"){
         if((x>p5.windowWidth*0.25&&x<p5.windowWidth*0.35&&y>p5.windowHeight*0.8&&y<p5.windowHeight)){
           cockpit.handleHudEvents(p5,"LEFT",isMobile(p5));
@@ -201,8 +203,6 @@ function Canvas(){
   }
 
   const handleSwipe = (p5: p5Type) =>{
-    let x = p5.mouseX;
-    let y = p5.mouseY;
     if(p5.mouseX-p5.pmouseX<40){
       cockpit.handleHudEvents(p5,"LEFT",isMobile(p5));
     }

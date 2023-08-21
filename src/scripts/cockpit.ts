@@ -11,11 +11,6 @@ import Fishingsim from "./huds/fishingsim";
 import Music from "./huds/music";
 import MusicPlayer from "./musicPlayer";
 import Skills from "./huds/skills";
-import MediaSearch from "./huds/mediaSearch";
-import Malaika from "./huds/malaika";
-import Crisp from "./huds/crisp";
-import Insupal from "./huds/insupal";
-import VFX from "./huds/vfx";
 
 class Cockpit {
     width: number;
@@ -37,8 +32,7 @@ class Cockpit {
         [new Home(p5,width,height),
             new ProjectSearch(p5,width,height),new Spaceball(p5,width,height), new Taskpad(p5,width,height), 
             new Faceflute(p5,width,height), new Vibecheck(p5,width,height), new Fishingsim(p5,width,height),
-            new Music(p5,width,height), new Skills(p5,width,height), new MediaSearch(p5,width,height), new Malaika(p5,width,height),
-            new VFX(p5,width,height), new Insupal(p5,width,height), new Crisp(p5,width,height)
+            new Music(p5,width,height), new Skills(p5,width,height)
         ];
         this.radio = new MusicPlayer(p5);
         this.hudScreens[0].boot();
@@ -59,22 +53,22 @@ class Cockpit {
     handleHudEvents(p5: p5Type, action:string,isMobile:boolean){
         let currentScreen = this.hudScreens[this.currentScreenIndex];
         let newScreenIndex=0;
-        if(this.screen.state=="off"){
-            if (action=="LEFT"){currentScreen.leftClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
-            if (action=="RIGHT"){currentScreen.rightClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
-            if (action=="ENTER"&&currentScreen.escPage!="projectSearch"&&currentScreen.escPage!="mediaSearch"
-            &&currentScreen.hudType!="skills"){
+        if(this.screen.state==="off"){
+            if (action==="LEFT"){currentScreen.leftClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
+            if (action==="RIGHT"){currentScreen.rightClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
+            if (action==="ENTER"&&currentScreen.escPage!=="projectSearch"&&(currentScreen.hudType!=="home"&&currentScreen.elementCount!==2)
+            &&currentScreen.hudType!=="skills"){
                 this.hudScreens.forEach(e => {
-                    if(e.hudType==currentScreen.elementList[currentScreen.elementCount]){
+                    if(e.hudType===currentScreen.elementList[currentScreen.elementCount]){
                         newScreenIndex = this.hudScreens.indexOf(e);}})
                 this.hudScreens[newScreenIndex].boot();
                 this.currentScreenIndex=newScreenIndex;
                 currentScreen.close();
                 this.radio.ambient[1].play();
             }
-            if (action=="ESC"&&currentScreen.hudType!="home"){
+            if (action==="ESC"&&currentScreen.hudType!=="home"){
                 this.hudScreens.forEach(e => {
-                    if(e.hudType==currentScreen.escPage){
+                    if(e.hudType===currentScreen.escPage){
                         newScreenIndex = this.hudScreens.indexOf(e);}})
                 this.hudScreens[newScreenIndex].boot();
                 this.currentScreenIndex=newScreenIndex;
@@ -86,33 +80,38 @@ class Cockpit {
 
     pinballEvent(action: string){
         let currentScreen = this.hudScreens[this.currentScreenIndex];
-        if (currentScreen.hudType=="spaceball"){
-            if ((action=="ENTER"||action=="ESC")&&currentScreen.elementCount==2&&this.screen.state=="off"){
+        if (currentScreen.hudType==="spaceball"){
+            if ((action==="ENTER"||action==="ESC")&&currentScreen.elementCount===2&&this.screen.state==="off"){
                 this.screen.pinballEvent(action);
                 this.radio.ambient[5].play();
                 this.radio.ambient[6].play();
             }
-            else if (this.screen.state=="on"){
+            else if (this.screen.state==="on"){
                 this.screen.pinballEvent(action);
                 this.radio.ambient[2].play();
             }
         }
-        else if (currentScreen.hudType=="taskpad"){
+        else if (currentScreen.hudType==="taskpad"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://taskpad.onrender.com/", '_blank');
             }
         }
-        else if (currentScreen.hudType=="faceflute"){
+        else if (currentScreen.hudType==="home"){
+            if (action==="ENTER"&&currentScreen.elementCount===2){
+                window.open("https://youtu.be/wT_2Efr8amg", '_blank');
+            }
+        }
+        else if (currentScreen.hudType==="faceflute"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://faceflute.onrender.com/", '_blank');
             }
         }
-        else if (currentScreen.hudType=="vibecheck"){
+        else if (currentScreen.hudType==="vibecheck"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://faceflute.onrender.com/", '_blank');
             }
         }
-        else if (currentScreen.hudType=="fishingsim"){
+        else if (currentScreen.hudType==="fishingsim"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://vimeo.com/700279343?share=copy", '_blank');
             }
@@ -122,22 +121,22 @@ class Cockpit {
                 window.open("https://www.docdroid.net/HXLJnfg/joshjob-resume-full-pdf", '_blank');
             }
         }
-        else if (currentScreen.hudType=="malaika"){
+        else if (currentScreen.hudType==="malaika"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://youtu.be/wwKDfcfcEOI", '_blank');
             }
         }
-        else if (currentScreen.hudType=="insupal"){
+        else if (currentScreen.hudType==="insupal"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://vimeo.com/282667508?share=copy", '_blank');
             }
         }
-        else if (currentScreen.hudType=="crisp"){
+        else if (currentScreen.hudType==="crisp"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://vimeo.com/282667508?share=copy", '_blank');
             }
         }
-        else if (currentScreen.hudType=="vfx"){
+        else if (currentScreen.hudType==="vfx"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
                 window.open("https://youtu.be/wT_2Efr8amg", '_blank');
             }
@@ -146,7 +145,7 @@ class Cockpit {
 
     musicEvent(action: string){
         let currentScreen = this.hudScreens[this.currentScreenIndex];
-        if (currentScreen.hudType=="music"&&action=="ENTER"){
+        if (currentScreen.hudType==="music"&&action==="ENTER"){
             if (this.radio.play(currentScreen.elementCount)){
                 currentScreen.setSpecialIndex(currentScreen.elementCount);
             }
