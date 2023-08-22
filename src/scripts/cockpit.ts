@@ -98,7 +98,7 @@ class Cockpit {
         }
         else if (currentScreen.hudType==="home"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
-                window.open("https://youtu.be/wT_2Efr8amg", '_blank');
+                window.open("https://youtu.be/Zc3eW7VWhP4", '_blank');
             }
         }
         else if (currentScreen.hudType==="faceflute"){
