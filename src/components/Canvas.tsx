@@ -192,7 +192,7 @@ function Canvas(){
       }
 
       if (nextScreen==="mediaSearch"&&currentScreen.hudType==="home"){
-        window.open("https://youtu.be/Zc3eW7VWhP4", '_blank');
+        window.open("https://youtu.be/rkBfU8_RM4o", '_blank');
       }
 
       if (!isMobile(p5)&&cockpit.screen.state==="off"){
