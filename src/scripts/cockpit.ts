@@ -56,7 +56,7 @@ class Cockpit {
         if(this.screen.state==="off"){
             if (action==="LEFT"){currentScreen.leftClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
             if (action==="RIGHT"){currentScreen.rightClick(p5);isMobile===false?this.radio.ambient[2].play():currentScreen.logo.dummy();}
-            if (action==="ENTER"&&currentScreen.escPage!=="projectSearch"&&(currentScreen.hudType!=="home"&&currentScreen.elementCount!==2)
+            if (action==="ENTER"&&currentScreen.escPage!=="projectSearch"&&(currentScreen.elementList[currentScreen.elementCount]!=="mediaSearch")
             &&currentScreen.hudType!=="skills"){
                 this.hudScreens.forEach(e => {
                     if(e.hudType===currentScreen.elementList[currentScreen.elementCount]){
