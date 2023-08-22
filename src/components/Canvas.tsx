@@ -63,34 +63,38 @@ function Canvas(){
     let currentScreen = cockpit.hudScreens[cockpit.currentScreenIndex];
     let newScreenIndex=0;
     if (currentScreen.hudType==="spaceball"&&currentScreen.elementCount===2){
-      if((x>0&&x<p5.windowWidth*0.45&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
-        cockpit.pinballEvent("lFlip");
+      if (cockpit.screen.state==="on"){
+        if((x>0&&x<p5.windowWidth*0.45&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
+          cockpit.pinballEvent("lFlip");
+        }
+        if((x>p5.windowWidth*0.55&&x<p5.windowWidth&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
+          cockpit.pinballEvent("rFlip");
+        }
+        if((x>0&&x<p5.windowWidth&&y>p5.windowHeight*0.8&&y<p5.windowHeight)){
+          cockpit.handleHudEvents(p5,"ESC",isMobile(p5));
+          cockpit.pinballEvent("ESC");
+        }
+        if((x>0&&x<p5.windowWidth&&y>0&&y<p5.windowHeight*0.2)){
+          cockpit.pinballEvent("move");
+        }
       }
-      if((x>p5.windowWidth*0.55&&x<p5.windowWidth&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
-        cockpit.pinballEvent("rFlip");
+      else if (cockpit.screen.state==="off"){
+        if (nextScreen==="info"||nextScreen==="stack"||nextScreen==="links"){
+          if (nextScreen==="info"){
+            currentScreen.elementCount=0;
+          }
+          else if (nextScreen==="stack"){
+            currentScreen.elementCount=1;
+          }
+          else if (nextScreen==="links"){
+            currentScreen.elementCount=2;
+          }
+        }
       }
       if((x>p5.windowWidth*0.45&&x<p5.windowWidth*0.55&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
         cockpit.handleHudEvents(p5,"ENTER",isMobile(p5));
         cockpit.pinballEvent("ENTER");
         cockpit.musicEvent("ENTER");
-      }
-      if((x>0&&x<p5.windowWidth&&y>p5.windowHeight*0.8&&y<p5.windowHeight)){
-        cockpit.handleHudEvents(p5,"ESC",isMobile(p5));
-        cockpit.pinballEvent("ESC");
-      }
-      if((x>0&&x<p5.windowWidth&&y>0&&y<p5.windowHeight*0.2)){
-        cockpit.pinballEvent("move");
-      }
-      if (nextScreen==="info"||nextScreen==="stack"||nextScreen==="links"){
-        if (nextScreen==="info"){
-          currentScreen.elementCount=0;
-        }
-        else if (nextScreen==="stack"){
-          currentScreen.elementCount=1;
-        }
-        else if (nextScreen==="links"){
-          currentScreen.elementCount=2;
-        }
       }
     }
     else{
