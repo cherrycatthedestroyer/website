@@ -9,7 +9,7 @@ class Vibecheck extends Project {
         super(p5,"VIBECHECK",width,height);
         this.hudType="vibecheck";
         this.escPage="projectSearch";
-        this.info1= new BodyText("A mobile game that has users input a song of their choice \nbased on a topic and then challenges them to guess who \npicked which song when they are played back. I developed\nthe app on Android Studio and used the Spotify API to access\na large database of songs for info and playback."
+        this.info1= new BodyText("A mobile game where users input a song of their choice based\non a prompt and are then challenged to guess what everyone\npicked when the songs are played back. I developed the app\non Android Studio using the Spotify API to access a huge\ndatabase of songs for info and playback."
         ,13,width,height,p5);
         this.stack=new BodyText(". Java\n. Spotify Api",13,width,height,p5);
         this.link=new PromptText("press ENTER to watch demo",15,width,height,"enter",p5);

@@ -10,7 +10,7 @@ class Skills extends Project {
         super(p5,"SKILLS",width,height);
         this.hudType="skills";
         this.escPage="home";
-        this.info1= new BodyText("I am an accomplished Front-End Developer who enjoys making\nfun and engaging user experiences. My passion for learning new\nIDE’s allow me to understand any new workspace fast, while my\nartistic design background allows me to create unqiue and visually\nstunning applications. As a multimedia artist I also enjoy working\non film and music projects whether that be editing videos,\ncompositing/animating vfx, or music production.\n"
+        this.info1= new BodyText("I'm an accomplished Front-End Developer who enjoys making\nfun and engaging user experiences. My passion for using new\nIDE's constantly allow me to understand any new workspace.\nAs a multimedia artist I also enjoy working on film and music\nprojects where I am editing videos, developing vfx, or adding\nsound design and music production.\n"
         ,13,width,height,p5);
         this.stack=new BodyText(". HTML\n. CSS\n. Javascript\n. Typescript\n. Java",13,width,height,p5);
         this.stack2=new BodyText(". EJS\n. React\n. Node\n. P5js\n. Next",13,width,height,p5);

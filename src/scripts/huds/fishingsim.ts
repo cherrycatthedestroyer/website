@@ -9,7 +9,7 @@ class Fishingsim extends Project {
         super(p5,"FISHINGSIM",width,height);
         this.hudType="fishingsim";
         this.escPage="projectSearch";
-        this.info1= new BodyText("A fishing simulator which allows the user to catch different \ntypes of fish depending on the bait used and the time of day.\nThere are some more mysterious creatures swimming around\nthat may have to be caught using different methods ..."
+        this.info1= new BodyText("A fishing simulator which allows the user to catch a variety\nof fish depending on which bait they use and time of day.\nThere are some more mysterious creatures swimming\naround that may have to be caught using different methods."
         ,13,width,height,p5);
         this.stack=new BodyText(". Java\n. Figma",13,width,height,p5);
         this.link=new PromptText("press ENTER to view",15,width,height,"link",p5);

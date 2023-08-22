@@ -8,7 +8,7 @@ class BodyText{
     height: number;
     font: p5Type.Font;
     constructor(input:string, size:number,width:number, height: number, p5:p5Type) {
-        this.font = p5.loadFont("assets/roboto.otf");
+        this.font = p5.loadFont("assets/robotoReg.otf");
         this.alignType = "center";
         this.text=input;
         this.size=size;
