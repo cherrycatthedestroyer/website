@@ -118,7 +118,7 @@ class Cockpit {
         }
         else if (currentScreen.hudType==="skills"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
-                window.open("https://www.docdroid.net/HXLJnfg/joshjob-resume-full-pdf", '_blank');
+                window.open("https://smallpdf.com/file#s=b69957ec-f250-47a7-8321-eb7a3f2c957d", '_blank');
             }
         }
         else if (currentScreen.hudType==="malaika"){

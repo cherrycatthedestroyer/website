@@ -43,7 +43,7 @@ function Loading() {
     <div id="p5_loading" className="center-container">
         <h1 className="rotating-element">Loading</h1>
         <h3>{facts[index]}</h3>
-        <a href="https://www.docdroid.net/HXLJnfg/joshjob-resume-full-pdf" 
+        <a href="https://smallpdf.com/file#s=b69957ec-f250-47a7-8321-eb7a3f2c957d" 
         target="_blank" rel="noopener noreferrer">click to view resume</a>
     </div>
     );
