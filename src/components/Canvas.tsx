@@ -35,26 +35,26 @@ function Canvas(){
 
   const handleKeyRelease = (p5: p5Type) =>{
     if(p5.keyCode === p5.LEFT_ARROW){
-      cockpit.pinballEvent("lFlip");
+      cockpit.pinballEvent(p5,"lFlip");
       cockpit.handleHudEvents(p5,"LEFT",isMobile(p5));
     }
     if(p5.keyCode === p5.RIGHT_ARROW){
-      cockpit.pinballEvent("rFlip");
+      cockpit.pinballEvent(p5,"rFlip");
       cockpit.handleHudEvents(p5,"RIGHT",isMobile(p5));
     }
     if(p5.keyCode === p5.ENTER){
       cockpit.handleHudEvents(p5,"ENTER",isMobile(p5));
-      cockpit.pinballEvent("ENTER");
+      cockpit.pinballEvent(p5,"ENTER");
       cockpit.musicEvent("ENTER");
     }
     if(p5.keyCode === p5.ESCAPE){
       cockpit.handleHudEvents(p5,"ESC",isMobile(p5));
-      cockpit.pinballEvent("ESC");
+      cockpit.pinballEvent(p5,"ESC");
     }
     if(p5.keyCode === 32){
-      cockpit.pinballEvent("move");
+      cockpit.pinballEvent(p5,"move");
     }
-  } 
+  }
 
   const handleClick = (p5: p5Type) =>{
     let x = p5.mouseX;
@@ -65,17 +65,17 @@ function Canvas(){
     if (currentScreen.hudType==="spaceball"&&currentScreen.elementCount===2){
       if (cockpit.screen.state==="on"){
         if((x>0&&x<p5.windowWidth*0.45&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
-          cockpit.pinballEvent("lFlip");
+          cockpit.pinballEvent(p5,"lFlip");
         }
         if((x>p5.windowWidth*0.55&&x<p5.windowWidth&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
-          cockpit.pinballEvent("rFlip");
+          cockpit.pinballEvent(p5,"rFlip");
         }
         if((x>0&&x<p5.windowWidth&&y>p5.windowHeight*0.8&&y<p5.windowHeight)){
           cockpit.handleHudEvents(p5,"ESC",isMobile(p5));
-          cockpit.pinballEvent("ESC");
+          cockpit.pinballEvent(p5,"ESC");
         }
         if((x>0&&x<p5.windowWidth&&y>0&&y<p5.windowHeight*0.2)){
-          cockpit.pinballEvent("move");
+          cockpit.pinballEvent(p5,"move");
         }
       }
       else if (cockpit.screen.state==="off"){
@@ -93,7 +93,7 @@ function Canvas(){
       }
       if((x>p5.windowWidth*0.45&&x<p5.windowWidth*0.55&&y>p5.windowHeight*0.2&&y<p5.windowHeight*0.8)){
         cockpit.handleHudEvents(p5,"ENTER",isMobile(p5));
-        cockpit.pinballEvent("ENTER");
+        cockpit.pinballEvent(p5,"ENTER");
         cockpit.musicEvent("ENTER");
       }
     }

@@ -78,7 +78,7 @@ class Cockpit {
         }
     }
 
-    pinballEvent(action: string){
+    pinballEvent(p5: p5Type, action: string){
         let currentScreen = this.hudScreens[this.currentScreenIndex];
         if (currentScreen.hudType==="spaceball"){
             if ((action==="ENTER"||action==="ESC")&&currentScreen.elementCount===2&&this.screen.state==="off"){
@@ -118,7 +118,7 @@ class Cockpit {
         }
         else if (currentScreen.hudType==="skills"){
             if (action==="ENTER"&&currentScreen.elementCount===2){
-                window.open("https://smallpdf.com/file#s=b69957ec-f250-47a7-8321-eb7a3f2c957d", '_blank');
+                this.downloadPDF(p5);
             }
         }
         else if (currentScreen.hudType==="malaika"){
@@ -174,6 +174,15 @@ class Cockpit {
         this.showHuds(p5,isMobile);
         this.screen.show(p5,isMobile);
         p5.pop();
+    }
+
+    downloadPDF(p5: p5Type) {
+        const pdfPath = 'assets/joshjob-resume.pdf';
+        const anchor = p5.createA(pdfPath, 'Download');
+        anchor.attribute('download', 'joshjob-resume.pdf');
+        anchor.style('display', 'none');
+        anchor.elt.click();
+        anchor.remove();
     }
 }
 
